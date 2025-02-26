@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    color: #2b2b2b;
+    font-size: 13px;
+    margin-top: 70px;
+    font-family: 'Cairo', sans-serif;
+}
+
+.btnPrimary {
+    background-color: #dc981b;
+    color: #fff;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: #000000c4;
+    z-index: 9998;
+    display: none;
+
+    &.open {
+        display: block;
+    }
+}
+
+.commonContentHeight {
+    min-height: calc(100vh - 120px);
+}

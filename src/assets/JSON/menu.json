@@ -1,0 +1,70 @@
+{
+    "Menu": [
+        {
+            "name": "Chicken and Pigeon",
+            "subname": "White Rice",
+            "price": "0",
+            "url": "assets/Images/Menu/chicken-pigeon-white-rice-min.png"
+        },
+        {
+            "name": "Chicken",
+            "subname": "White Rice",
+            "price": "0",
+            "url": "assets/Images/Menu/chicken-white-rice-min.png"
+        },
+        {
+            "name": "Fish",
+            "subname": "Biriyani",
+            "price": "0",
+            "url": "assets/Images/Menu/fish-biriyani-min.png"
+        },
+        {
+            "name": "Full Goat",
+            "subname": "White Rice",
+            "price": "0",
+            "url": "assets/Images/Menu/full-goat-white-rice-min.png"
+        },
+        {
+            "name": "Half Lamb",
+            "subname": "Biriyani",
+            "price": "0",
+            "url": "assets/Images/Menu/half-lamb-biriyani-min.png"
+        },
+        {
+            "name": "Half Lamb",
+            "subname": "White Rice",
+            "price": "0",
+            "url": "assets/Images/Menu/half-lamb-white-rice.png"
+        },
+        {
+            "name": "Half Lamb",
+            "subname": "Mandi",
+            "price": "0",
+            "url": "assets/Images/Menu/half-lamb-mandi-min.png"
+        },
+        {
+            "name": "Whole Lamb",
+            "subname": "Biriyani",
+            "price": "0",
+            "url": "assets/Images/Menu/whole-lamb-biriyani-min.png"
+        },
+        {
+            "name": "1/4 Lamb",
+            "subname": "Biriyani",
+            "price": "0",
+            "url": "assets/Images/Menu/quarter-lamb-biryani.png"
+        },
+        {
+            "name": "1/4 Lamb",
+            "subname": "White Rice",
+            "price": "0",
+            "url": "assets/Images/Menu/quater-lamb-white-rice-min.png"
+        },
+        {
+            "name": "Indian Lamb",
+            "subname": "Biriyani",
+            "price": "0",
+            "url": "assets/Images/Menu/indian-lamb-biriyani-min.png"
+        }
+    ]
+}

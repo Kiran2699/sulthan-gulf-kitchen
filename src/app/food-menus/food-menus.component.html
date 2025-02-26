@@ -1,0 +1,18 @@
+<main class="foodMenu commonContentHeight p-5">
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-3 pe-0 pw-1 pb-3" *ngFor="let item of MenuList">
+            <div class="MenuWrapper">
+                <div class="item-wrapper">
+                    <img class="item-image" [src]="item.url" alt="item-image">
+                </div>
+                <div class="item-name px-2 py-4">
+                    <span class="d-block mb-2">{{ item.name }}</span>
+                    <small class="">{{ '(' + item.subname + ')' }}</small>
+                </div>
+                <div class="price-banner">
+                    <span>&#163; {{ item.price }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
