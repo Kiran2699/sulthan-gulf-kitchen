@@ -41,7 +41,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            width: 50px;
+            width: 70px;
             height: 30px;
             background-color: black;
             color: #fff;
@@ -51,4 +51,40 @@
             align-items: center;
         }
     }
+
+    .menuList {
+        flex-wrap: nowrap;
+        overflow: auto;
+    }
+
+    .menu-header {
+        display: block;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: .5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: underline;
+        text-underline-offset: 5px;
+        margin-left: 0.7rem;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

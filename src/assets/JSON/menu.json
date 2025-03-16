@@ -1,70 +1,107 @@
 {
-    "Menu": [
+    "Biriyani": [
         {
-            "name": "Chicken and Pigeon",
-            "subname": "White Rice",
-            "price": "0",
-            "url": "assets/Images/Menu/chicken-pigeon-white-rice-min.png"
+            "name": "chicken biriyani",
+            "price": "6.99",
+            "url": "assets/Images/Menu/Biriyani/chicken-biriyani.jpg"
         },
         {
-            "name": "Chicken",
-            "subname": "White Rice",
-            "price": "0",
-            "url": "assets/Images/Menu/chicken-white-rice-min.png"
+            "name": "lamb biriyani",
+            "price": "10.99",
+            "url": "assets/Images/Menu/Biriyani/lamb-biriyani.jpg"
         },
         {
-            "name": "Fish",
-            "subname": "Biriyani",
-            "price": "0",
-            "url": "assets/Images/Menu/fish-biriyani-min.png"
+            "name": "fish biriyani",
+            "price": "8.99",
+            "url": "assets/Images/Menu/Biriyani/fish-biriyani.jpg"
         },
         {
-            "name": "Full Goat",
-            "subname": "White Rice",
-            "price": "0",
-            "url": "assets/Images/Menu/full-goat-white-rice-min.png"
+            "name": "prawn biriyani",
+            "price": "8.99",
+            "url": "assets/Images/Menu/Biriyani/prawn-biriyani.jpg"
+        }
+    ],
+    "Mandi": [
+        {
+            "name": "chicken mandi",
+            "price": "8.99",
+            "url": "assets/Images/Menu/Mandi/chicken-mandi.jpg"
         },
         {
-            "name": "Half Lamb",
-            "subname": "Biriyani",
-            "price": "0",
-            "url": "assets/Images/Menu/half-lamb-biriyani-min.png"
+            "name": "lamb mandi",
+            "price": "11.99",
+            "url": "assets/Images/Menu/Mandi/lamb-mandi.jpg"
         },
         {
-            "name": "Half Lamb",
-            "subname": "White Rice",
-            "price": "0",
-            "url": "assets/Images/Menu/half-lamb-white-rice.png"
+            "name": "white rice",
+            "price": "3.99",
+            "url": "assets/Images/Menu/Mandi/white-rice.jpg"
+        }
+    ],
+    "Large": [
+        {
+            "name": "half chicken mandi",
+            "price": "9.99",
+            "url": "assets/Images/Menu/Large/lg-half-chicken-biriyani.jpg"
         },
         {
-            "name": "Half Lamb",
-            "subname": "Mandi",
-            "price": "0",
-            "url": "assets/Images/Menu/half-lamb-mandi-min.png"
+            "name": "half chicken mandi",
+            "price": "10.99",
+            "url": "assets/Images/Menu/Large/lg-half-chicken-mandi.jpg"
         },
         {
-            "name": "Whole Lamb",
-            "subname": "Biriyani",
-            "price": "0",
-            "url": "assets/Images/Menu/whole-lamb-biriyani-min.png"
+            "name": "1 arm lamb mandi",
+            "price": "59.99",
+            "url": "assets/Images/Menu/Large/quarter-lamb-biryani.png"
+        }
+    ],
+    "Curry": [
+        {
+            "name": "chicken curry",
+            "price": "6.99",
+            "url": "assets/Images/Menu/Curry/chicken-curry.jpg"
         },
         {
-            "name": "1/4 Lamb",
-            "subname": "Biriyani",
-            "price": "0",
-            "url": "assets/Images/Menu/quarter-lamb-biryani.png"
+            "name": "lamb curry",
+            "price": "7.99",
+            "url": "assets/Images/Menu/Curry/lamb-curry.jpg"
         },
         {
-            "name": "1/4 Lamb",
-            "subname": "White Rice",
-            "price": "0",
-            "url": "assets/Images/Menu/quater-lamb-white-rice-min.png"
+            "name": "prawn curry",
+            "price": "7.99",
+            "url": "assets/Images/Menu/Curry/prawn-curry.jpg"
         },
         {
-            "name": "Indian Lamb",
-            "subname": "Biriyani",
-            "price": "0",
-            "url": "assets/Images/Menu/indian-lamb-biriyani-min.png"
+            "name": "paneer butter masala",
+            "price": "5.99",
+            "url": "assets/Images/Menu/Curry/paneer-butter-masala.jpg"
+        }
+    ],
+    "Addons": [
+        {
+            "name": "plain naan",
+            "price": "1.99",
+            "url": "assets/Images/Menu/Addons/plain-naan.jpg"
+        },
+        {
+            "name": "1/2 grilled chicken",
+            "price": "8.99",
+            "url": "assets/Images/Menu/Addons/half-grill-chicken.jpg"
+        },
+        {
+            "name": "full grilled chicken",
+            "price": "12.99",
+            "url": "assets/Images/Menu/Addons/full-grill-chicken.jpg"
+        },
+        {
+            "name": "grilled chicken",
+            "price": "12.99",
+            "url": "assets/Images/Menu/Addons/grill-fish.jpg"
+        },
+        {
+            "name": "grilled prawns",
+            "price": "8.99",
+            "url": "assets/Images/Menu/Addons/grill-prawn.jpg"
         }
     ]
 }
