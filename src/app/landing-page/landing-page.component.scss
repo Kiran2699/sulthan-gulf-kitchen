@@ -5,19 +5,19 @@
         background-image: url('../../assets/Images/banner.jpg');
         background-size: cover;
         background-repeat: no-repeat;
-        background-position: center;
+        background-position: 75%;
         overflow: hidden;
         position: relative;
 
         .bannerContent {
-            color: #fff;
+            color: #EFEFEF;
             font-weight: 700;
-            font-size: 2rem;
+            font-size: 1.6rem;
             z-index: 2;
             position: absolute;
-            top: 50%;
+            bottom: 4%;
             left: 20%;
-            transform: translate(-20%, -50%);
+            transform: translate(-20%, -20%);
 
             .mainText {
                 font-size: 3rem;
@@ -29,7 +29,6 @@
             content: '';
             position: absolute;
             inset: 0;
-            background-color: #000000c4;
             z-index: 1;
         }
     }

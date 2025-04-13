@@ -1,92 +1,119 @@
 <main class="foodMenu commonContentHeight p-3 me-sm-3 mr-md-0 p-lg-5">
-    <div>
-        <span class="menu-header">Biriyani</span>
-        <div class="row menuList px-0 mx-0">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 pe-0 pw-1 pb-3" *ngFor="let item of BiriyaniMenuList">
-                <div class="MenuWrapper">
-                    <div class="item-wrapper">
-                        <img class="item-image" [src]="item.url" alt="item-image">
-                    </div>
-                    <div class="item-name px-2 py-4">
-                        <span class="d-block mb-2">{{ item.name }}</span>
-                    </div>
-                    <div class="price-banner">
-                        <span>&#163; {{ item.price }}</span>
+    @if (MenuType == 'P') {
+        <span class="menu-header">Party Order</span>
+    }
+    @else {
+        <span class="menu-header mb-3">Retail Order</span>
+        <div class="alert alert-info" role="alert">
+            We are currently unable to accept retail orders.
+        </div>
+    }
+
+    @if (SelectedItem && SelectedSizeItemToDisplay) {
+        <div class="modal fade" id="selectedItemModel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">{{ SelectedItem.commonFoodDetail.name }}</h5>
+                  <button type="button" class="btn-close" (click)="cancelItem()"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="pe-0 pw-1 pb-3">
+                            <div class="MenuWrapper" >
+                                <div class="item-wrapper">
+                                    <img class="item-image" [src]="SelectedSizeItemToDisplay.url" alt="item-image">
+                                </div>
+                                <div class="item-name px-2 py-3">
+                                    <span class="d-block">{{ SelectedSizeItemToDisplay.name }}</span>
+                                </div>
+                                <div class="price-banner">
+                                    <span>&#163; {{ SelectedSizeItemToDisplay.price }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-name px-3 d-flex justify-content-between align-items-center" *ngIf="SelectedItem.sizeVarient.length == 3">
+                            <button class="sizeVarBtn" [ngClass]="{ 'active': SelectedSize == 'S' }" (click)="selectSize('S', 0)">S</button>
+                            <button class="sizeVarBtn" [ngClass]="{ 'active': SelectedSize == 'M' }" (click)="selectSize('M', 1)">M</button>
+                            <button class="sizeVarBtn" [ngClass]="{ 'active': SelectedSize == 'L' }" (click)="selectSize('L', 2)">L</button>
+                        </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="cancelItem()">Cancel</button>
+                  <button type="button" class="btn btn-primary" (click)="addItem()">Add to cart</button>
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-    <div class="mt-5">
-        <span class="menu-header">Mandi</span>
-        <div class="row menuList px-0 mx-0">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 pe-0 pw-1 pb-3" *ngFor="let item of MandiMenuList">
-                <div class="MenuWrapper">
-                    <div class="item-wrapper">
-                        <img class="item-image" [src]="item.url" alt="item-image">
-                    </div>
-                    <div class="item-name px-2 py-4">
-                        <span class="d-block mb-2">{{ item.name }}</span>
-                    </div>
-                    <div class="price-banner">
-                        <span>&#163; {{ item.price }}</span>
+          </div>
+    }
+
+    <mat-tab-group>
+        <mat-tab label="Arabic">
+            <div class="mt-3 position-relative">
+                <div class="row menuList px-0 mx-0" #ArabicCarousel>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 pe-0 pw-1 pb-3" *ngFor="let item of ArabicMenuList">
+                        <div class="MenuWrapper card-item" (click)="selectItem(item, 'A')">
+                            <div class="item-wrapper">
+                                <img class="item-image" [src]="item.commonFoodDetail.url" alt="item-image">
+                            </div>
+                            <div class="item-name px-2 py-4">
+                                <span class="d-block mb-2">{{ item.commonFoodDetail.name }}</span>
+                            </div>
+                            <div class="price-banner">
+                                <span>&#163; {{ item.commonFoodDetail.price }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <button class="arrow left navButton" [disabled]="disableArabicPrev" mat-icon-button (click)="scroll('left', ArabicCarousel, 'ar')"><mat-icon>chevron_left</mat-icon></button>
+                <button class="arrow right navButton" [disabled]="disableArabicNext" mat-icon-button (click)="scroll('right', ArabicCarousel, 'ar')"><mat-icon>chevron_right</mat-icon></button>
             </div>
-        </div>
-    </div>
-    <div class="mt-5">
-        <span class="menu-header">Large Size</span>
-        <div class="row menuList px-0 mx-0">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 pe-0 pw-1 pb-3" *ngFor="let item of LargeMenuList">
-                <div class="MenuWrapper">
-                    <div class="item-wrapper">
-                        <img class="item-image" [src]="item.url" alt="item-image">
-                    </div>
-                    <div class="item-name px-2 py-4">
-                        <span class="d-block mb-2">{{ item.name }}</span>
-                    </div>
-                    <div class="price-banner">
-                        <span>&#163; {{ item.price }}</span>
-                    </div>
+        </mat-tab>
+        <mat-tab label="Indian">
+            <div class="mt-3 position-relative">
+                <div class="row menuList px-0 mx-0" #IndianCarousel>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 pe-0 pw-1 pb-3" *ngFor="let item of IndianMenuList">
+                        <div class="MenuWrapper card-item" (click)="selectItem(item, 'I')">
+                            <div class="item-wrapper">
+                                <img class="item-image" [src]="item.commonFoodDetail.url" alt="item-image">
+                            </div>
+                            <div class="item-name px-2 py-4">
+                                <span class="d-block mb-2">{{ item.commonFoodDetail.name }}</span>
+                            </div>
+                            <div class="price-banner">
+                                <span>&#163; {{ item.commonFoodDetail.price }}</span>
+                            </div>
+                        </div>
+                    </div>    
                 </div>
+                <button class="arrow left navButton" [disabled]="disableIndianPrev" mat-icon-button (click)="scroll('left', IndianCarousel, 'ind')"><mat-icon>chevron_left</mat-icon></button>
+                <button class="arrow right navButton" [disabled]="disableIndianNext" mat-icon-button (click)="scroll('right', IndianCarousel, 'ind')"><mat-icon>chevron_right</mat-icon></button>
             </div>
-        </div>
-    </div>
-    <div class="mt-5">
-        <span class="menu-header">Curry</span>
-        <div class="row menuList px-0 mx-0">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 pe-0 pw-1 pb-3" *ngFor="let item of CurryMenuList">
-                <div class="MenuWrapper">
-                    <div class="item-wrapper">
-                        <img class="item-image" [src]="item.url" alt="item-image">
+        </mat-tab>
+
+        @if (MenuType != 'P') {
+            <mat-tab label="Others">
+                <div class="mt-3 position-relative">
+                    <div class="row menuList px-0 mx-0" #OtherCarousel>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 pe-0 pw-1 pb-3" *ngFor="let item of IndianMenuList">
+                            <div class="MenuWrapper card-item" (click)="selectItem(item, 'O')">
+                                <div class="item-wrapper">
+                                    <img class="item-image" [src]="item.commonFoodDetail.url" alt="item-image">
+                                </div>
+                                <div class="item-name px-2 py-4">
+                                    <span class="d-block mb-2">{{ item.commonFoodDetail.name }}</span>
+                                </div>
+                                <div class="price-banner">
+                                    <span>&#163; {{ item.commonFoodDetail.price }}</span>
+                                </div>
+                            </div>
+                        </div>    
                     </div>
-                    <div class="item-name px-2 py-4">
-                        <span class="d-block mb-2">{{ item.name }}</span>
-                    </div>
-                    <div class="price-banner">
-                        <span>&#163; {{ item.price }}</span>
-                    </div>
+                    <button class="arrow left navButton" [disabled]="disableIndianPrev" mat-icon-button (click)="scroll('left', OtherCarousel, 'ot')"><mat-icon>chevron_left</mat-icon></button>
+                    <button class="arrow right navButton" [disabled]="disableIndianNext" mat-icon-button (click)="scroll('right', OtherCarousel, 'ot')"><mat-icon>chevron_right</mat-icon></button>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="mt-5">
-        <span class="menu-header">Addons</span>
-        <div class="row menuList px-0 mx-0">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 pe-0 pw-1 pb-3" *ngFor="let item of AddonsMenuList">
-                <div class="MenuWrapper">
-                    <div class="item-wrapper">
-                        <img class="item-image" [src]="item.url" alt="item-image">
-                    </div>
-                    <div class="item-name px-2 py-4">
-                        <span class="d-block mb-2">{{ item.name }}</span>
-                    </div>
-                    <div class="price-banner">
-                        <span>&#163; {{ item.price }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            </mat-tab>
+        }
+    </mat-tab-group>
 </main>

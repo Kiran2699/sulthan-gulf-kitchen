@@ -1,4 +1,25 @@
 .foodMenu {
+    width: 100%;
+
+    .navButton {
+        background-color: #05060699;
+        position: absolute;
+        top: 50%;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-50%);
+
+        &.left {
+            left: 20px;
+        }
+
+        &.right {
+            right: 10px;
+        }
+    }
+
     .MenuWrapper {
         box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
         border-radius: 6px;
@@ -32,7 +53,7 @@
             white-space: noWrap;
         }
 
-        &:hover {
+        &.card-item:hover {
             opacity: .7;
         }
 
@@ -67,6 +88,7 @@
         text-decoration: underline;
         text-underline-offset: 5px;
         margin-left: 0.7rem;
+        text-align: center;
     }
 }
 
@@ -87,4 +109,44 @@
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+  
+.food-card {
+    img {
+        height: 150px;
+        object-fit: cover;
+    }
+}
+
+.mat-mdc-icon-button[disabled], .mat-mdc-icon-button.mat-mdc-button-disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.sizeVarBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #aea7a7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background-color: transparent;
+    font-weight: 600;
+
+    &.active {
+        border-color: #d59b00;
+        background-color: #d59b00;
+        color: #fefefe;
+    }
+}
+
+.modal-title {
+    text-transform: capitalize;
+}
+
+.modal-dialog {
+    width: 350px;
 }
