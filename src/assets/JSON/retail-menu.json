@@ -1,0 +1,109 @@
+{
+    "Arabic": [
+        {
+            "name": "chicken mandi",
+            "price": "18.99",
+            "url": "assets/Images/menu/arabic/full-chicken-mandi.svg",
+            "sizeVarient": []
+        },
+        {
+            "name": "Lamb mandi",
+            "price": "10.99",
+            "url": "assets/Images/menu/arabic/lamb-mandi.svg",
+            "sizeVarient": []
+        }
+    ],
+    "Indian": [
+        {
+            "name": "Fish biriyani",
+            "price": "8.99",
+            "url": "assets/Images/menu/indian/fish-biriyani.svg",
+            "sizeVarient": []
+        },
+        {
+            "name": "prawn-biriyani",
+            "price": "8.99",
+            "url": "assets/Images/menu/indian/prawn-biriyani.svg",
+            "sizeVarient": []
+        },
+        {
+            "name": "white rice",
+            "price": "3.99",
+            "url": "assets/Images/menu/indian/white-rice.svg",
+            "sizeVarient": []
+        }
+    ],
+    "Others": [
+        {
+            "name": "naan",
+            "price": "1.49",
+            "url": "assets/Images/menu/addons/naan.svg",
+            "sizeVarient": []
+        },
+        {
+            "name": "paneer butter masala",
+            "price": "5.99",
+            "url": "assets/Images/menu/addons/paneer-butter-masala.svg",
+            "sizeVarient": []
+        },
+        {
+            "name": "chicken curry",
+            "price": "6.99",
+            "url": "assets/Images/menu/addons/chicken-curry.svg",
+            "sizeVarient": []
+        },
+        {
+            "name": "lamb curry",
+            "price": "7.49",
+            "url": "assets/Images/menu/addons/lamb-curry.svg",
+            "sizeVarient": []
+        },
+        {
+            "name": "mutton curry",
+            "price": "7.49",
+            "url": "assets/Images/menu/addons/mutton-curry.svg",
+            "sizeVarient": []
+        },
+        {
+            "name": "prawn curry",
+            "price": "7.49",
+            "url": "assets/Images/menu/addons/prawn-curry.svg",
+            "sizeVarient": []
+        },
+        {
+            "name": "chicken shawarma",
+            "price": "6.99",
+            "url": "assets/Images/menu/addons/chicken-shawarma.svg",
+            "sizeVarient": []
+        },
+        {
+            "name": "grilled chicken",
+            "price": "1.49",
+            "url": "assets/Images/menu/addons/half-grill-chicken.svg",
+            "sizeVarient": [
+                {
+                    "name": "half",
+                    "price": "8.99",
+                    "url": "assets/Images/menu/addons/half-grill-chicken.svg"
+                },
+                {
+                    "name": "full",
+                    "price": "12.99",
+                    "url": "assets/Images/menu/addons/full-grill-chicken.svg"
+                }
+            ]
+        },
+        {
+            "name": "grilled fish",
+            "price": "9.99",
+            "url": "assets/Images/menu/addons/grilled-fish.svg",
+            "sizeVarient": []
+        },
+        {
+            "name": "grilled prawn",
+            "price": "8.99",
+            "url": "assets/Images/menu/addons/grill-prawn.svg",
+            "sizeVarient": []
+        }
+    ]
+}

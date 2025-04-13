@@ -7,9 +7,15 @@
                 <img src="assets/Images/logo.PNG" class="logo" alt="logo">
             </span>
         </div>
-        <div>
+        <div class="d-flex align-items-center">
             <a class="navbar-links" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/home">Home</a>
-            <a class="navbar-links" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/menu">Menu</a>
+            <div class="dropdown">
+              <span class="navbar-links dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">Menu</span>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li class="dropdown-item" ariaCurrentWhenActive="page" [queryParams]="{ type: 'R' }" routerLink="/menu">Retail Order</li>
+                <li class="dropdown-item" ariaCurrentWhenActive="page" [queryParams]="{ type: 'P' }" routerLink="/menu">Party Order</li>
+              </ul>
+            </div>
             <a class="navbar-links" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/contact-us">Contact Us</a>
         </div>
       </div>
@@ -26,8 +32,17 @@
                 <img src="assets/Images/logo.PNG" class="logo" routerLink="/home" alt="logo">
             </span>
         </div>
-        <div class="hamb-container" id="hamb-container" (click)="onMenuClick()">
-          <div class="hamb"></div>
+        <div class="d-flex align-items-center">
+          <div class="dropdown">
+            <span class="navbar-links dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">Menu</span>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li class="dropdown-item" ariaCurrentWhenActive="page" [queryParams]="{ type: 'R' }" routerLink="/menu">Retail Order</li>
+              <li class="dropdown-item" ariaCurrentWhenActive="page" [queryParams]="{ type: 'P' }" routerLink="/menu">Party Order</li>
+            </ul>
+          </div>
+          <div class="hamb-container" id="hamb-container" (click)="onMenuClick()">
+            <div class="hamb"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -35,7 +50,6 @@
 
   <div class="sideMenuWrapper" id="side-menu-wrapper">
     <a class="sideMenuLinks" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/home">Home</a>
-    <a class="sideMenuLinks" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/menu">Menu</a>
     <a class="sideMenuLinks" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/contact-us">Contact Us</a>
   </div>
 
