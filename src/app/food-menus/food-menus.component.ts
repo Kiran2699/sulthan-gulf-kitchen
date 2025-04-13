@@ -28,7 +28,9 @@ export type CommonFoodDetail = {
 
 export class FoodMenusComponent implements AfterViewInit {
   MenuType: 'P' | 'R' = 'P';
-  SelectedItem!: foodMenuDetail | null;
+  SelectedItem: foodMenuDetail = {
+    commonFoodDetail: { name: '', price: '', url: '' }, sizeVarient: []
+  };
   SelectedCusine = '';
   SelectedSize = 'S';
   SelectedSizeItemToDisplay!: CommonFoodDetail;
@@ -71,7 +73,10 @@ export class FoodMenusComponent implements AfterViewInit {
 
   pushData(response: any) {
     if (response) {
-
+      this.ArabicMenuList = [];
+      this.IndianMenuList = [];
+      this.OtherMenuList = [];
+      
       response.Arabic.forEach((item: any, index: number) => {
         let sizeVarient: CommonFoodDetail[] = [];
         item.sizeVarient.forEach((sizeItem: any) => {
@@ -170,7 +175,6 @@ export class FoodMenusComponent implements AfterViewInit {
   }
 
   cancelItem() {
-    this.SelectedItem = null;
     this.SelectedSize = 'S';
     this.SelectedCusine = '';
     $('#selectedItemModel').modal('hide');

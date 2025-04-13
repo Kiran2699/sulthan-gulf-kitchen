@@ -2,75 +2,75 @@
     "Arabic": [
         {
             "name": "4 sea bass biriyani",
-            "price": "1.49",
+            "price": "120",
             "url": "assets/Images/menu/arabic/4-sea-bass-briyani-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "6 sea bass half salmon",
-            "price": "1.49",
-            "url": "assets/Images/Menu/arabic/6-sea-bass-half-salmon-arab-sty.svg",
+            "price": "180",
+            "url": "assets/Images/menu/arabic/6-sea-bass-half-salmon-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "1/4 lamb biriyani",
-            "price": "1.49",
-            "url": "assets/Images/Menu/arabic/quarter-lamb-briyani-arab-sty.svg",
+            "price": "120",
+            "url": "assets/Images/menu/arabic/quarter-lamb-briyani-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "Whole goat",
-            "price": "1.49",
-            "url": "assets/Images/Menu/arabic/whole-goat-arab-sty.svg",
+            "price": "260",
+            "url": "assets/Images/menu/arabic/whole-goat-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "Whole lamb biriyani",
-            "price": "1.49",
-            "url": "assets/Images/Menu/arabic/whole-lamb-briyani-arab-sty-280p.svg",
+            "price": "250",
+            "url": "assets/Images/menu/arabic/whole-lamb-briyani-arab-sty-280p.svg",
             "sizeVarient": []
         },
         {
             "name": "Whole lamb biriyani (XL)",
-            "price": "1.49",
-            "url": "assets/Images/Menu/arabic/whole-lamb-briyani-arab-sty-300p.svg",
+            "price": "300",
+            "url": "assets/Images/menu/arabic/whole-lamb-briyani-arab-sty-300p.svg",
             "sizeVarient": []
         },
         {
             "name": "Whole lamb non grilled",
-            "price": "1.49",
-            "url": "assets/Images/Menu/arabic/whole-lamb-non-grilled-arab-sty.svg",
+            "price": "280",
+            "url": "assets/Images/menu/arabic/whole-lamb-non-grilled-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "Whole lamb white rice",
-            "price": "1.49",
-            "url": "assets/Images/Menu/arabic/whole-lamb-white-rice-arab-sty.svg",
+            "price": "300",
+            "url": "assets/Images/menu/arabic/whole-lamb-white-rice-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "1 arm lamb biriyani",
-            "price": "1.49",
-            "url": "assets/Images/Menu/arabic/1-arm-lamb-briyani.svg",
+            "price": "49.99",
+            "url": "assets/Images/menu/arabic/1-arm-lamb-briyani.svg",
             "sizeVarient": []
         },
         {
-            "name": "Half chicken mandi",
-            "price": "1.49",
-            "url": "assets/Images/menu/indian/half-chicken-mandi.svg.svg",
+            "name": "chicken mandi",
+            "price": "18.99",
+            "url": "assets/Images/menu/arabic/full-chicken-mandi.svg",
             "sizeVarient": []
         }
     ],
     "Indian": [
         {
             "name": "whole lamb biriyani",
-            "price": "1.49",
+            "price": "300",
             "url": "assets/Images/menu/indian/whole-lamb-briyani-ind-sty.svg",
             "sizeVarient": []
         },
         {
-            "name": "whole lamb biriyani",
-            "price": "1.49",
+            "name": "whole lamb mandi",
+            "price": "300",
             "url": "assets/Images/menu/indian/whole-lamb-mandi-ind-sty.svg",
             "sizeVarient": []
         }

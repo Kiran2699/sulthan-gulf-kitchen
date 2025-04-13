@@ -3,6 +3,7 @@ body {
     color: #2b2b2b;
     font-size: 13px;
     margin-top: 70px!important;
+    height: calc(100% - 70px)!important;
 }
 
 .btnPrimary {
@@ -14,7 +15,7 @@ body {
     position: fixed;
     inset: 0;
     background-color: #000000c4;
-    z-index: 9998;
+    z-index: 1;
     display: none;
 
     &.open {
