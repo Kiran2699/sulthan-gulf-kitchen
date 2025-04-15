@@ -53,27 +53,46 @@
             "price": "49.99",
             "url": "assets/Images/menu/arabic/1-arm-lamb-briyani.svg",
             "sizeVarient": []
-        },
-        {
-            "name": "chicken mandi",
-            "price": "18.99",
-            "url": "assets/Images/menu/arabic/full-chicken-mandi.svg",
-            "sizeVarient": []
         }
     ],
     "Indian": [
         {
             "name": "whole lamb biriyani",
-            "price": "300",
+            "price": "170",
             "url": "assets/Images/menu/indian/whole-lamb-briyani-ind-sty.svg",
-            "sizeVarient": []
+            "sizeVarient": [
+                {
+                    "name": "half",
+                    "price": "170",
+                    "url": "assets/Images/menu/indian/whole-lamb-briyani-ind-sty.svg"
+                },
+                {
+                    "name": "full",
+                    "price": "300",
+                    "url": "assets/Images/menu/indian/whole-lamb-briyani-ind-sty.svg"
+                }
+            ]
         },
         {
             "name": "whole lamb mandi",
-            "price": "300",
+            "price": "170",
             "url": "assets/Images/menu/indian/whole-lamb-mandi-ind-sty.svg",
-            "sizeVarient": []
+            "sizeVarient": [
+                {
+                    "name": "half",
+                    "price": "170",
+                    "url": "assets/Images/menu/indian/whole-lamb-mandi-ind-sty.svg"
+                },
+                {
+                    "name": "full",
+                    "price": "300",
+                    "url": "assets/Images/menu/indian/whole-lamb-mandi-ind-sty.svg"
+                }
+            ]
         }
     ],
-    "Others": []
+    "Mandi": [],
+    "Biriyani": [],
+    "Curry": [],
+    "Addons": []
 }

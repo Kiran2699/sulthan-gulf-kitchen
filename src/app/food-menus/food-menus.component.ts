@@ -32,7 +32,7 @@ export class FoodMenusComponent implements AfterViewInit {
     commonFoodDetail: { name: '', price: '', url: '' }, sizeVarient: []
   };
   SelectedCusine = '';
-  SelectedSize = 'S';
+  SelectedSize = 'H';
   SelectedSizeItemToDisplay!: CommonFoodDetail;
 
   ArabicMenuList: foodMenuDetail[] = [];
@@ -43,9 +43,21 @@ export class FoodMenusComponent implements AfterViewInit {
   disableIndianPrev = true;
   disableIndianNext = false;
 
-  OtherMenuList: foodMenuDetail[] = [];
-  disableOtherPrev = true;
-  disableOtherNext = false;
+  MandiMenuList: foodMenuDetail[] = [];
+  disableMandiPrev = true;
+  disableMandiNext = false;
+
+  BrMenuList: foodMenuDetail[] = [];
+  disableBrPrev = true;
+  disableBrNext = false;
+
+  CurMenuList: foodMenuDetail[] = [];
+  disableCurPrev = true;
+  disableCurNext = false;
+
+  AddMenuList: foodMenuDetail[] = [];
+  disableAddPrev = true;
+  disableAddNext = false;
 
   constructor(private _mainService: MainService, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -75,8 +87,11 @@ export class FoodMenusComponent implements AfterViewInit {
     if (response) {
       this.ArabicMenuList = [];
       this.IndianMenuList = [];
-      this.OtherMenuList = [];
-      
+      this.MandiMenuList = [];
+      this.BrMenuList = [];
+      this.CurMenuList = [];
+      this.AddMenuList = [];
+
       response.Arabic.forEach((item: any, index: number) => {
         let sizeVarient: CommonFoodDetail[] = [];
         item.sizeVarient.forEach((sizeItem: any) => {
@@ -115,7 +130,7 @@ export class FoodMenusComponent implements AfterViewInit {
         });
       });
 
-      response.Others.forEach((item: any, index: number) => {
+      response.Mandi.forEach((item: any, index: number) => {
         let sizeVarient: CommonFoodDetail[] = [];
         item.sizeVarient.forEach((sizeItem: any) => {
           sizeVarient.push({
@@ -124,7 +139,64 @@ export class FoodMenusComponent implements AfterViewInit {
             url: sizeItem.url,
           });
         });
-        this.OtherMenuList.push({
+        this.MandiMenuList.push({
+          commonFoodDetail: {
+            name: item.name,
+            price: item.price,
+            url: item.url,
+          },
+          sizeVarient: sizeVarient
+        });
+      });
+
+      response.Biriyani.forEach((item: any, index: number) => {
+        let sizeVarient: CommonFoodDetail[] = [];
+        item.sizeVarient.forEach((sizeItem: any) => {
+          sizeVarient.push({
+            name: sizeItem.name,
+            price: sizeItem.price,
+            url: sizeItem.url,
+          });
+        });
+        this.BrMenuList.push({
+          commonFoodDetail: {
+            name: item.name,
+            price: item.price,
+            url: item.url,
+          },
+          sizeVarient: sizeVarient
+        });
+      });
+
+      response.Curry.forEach((item: any, index: number) => {
+        let sizeVarient: CommonFoodDetail[] = [];
+        item.sizeVarient.forEach((sizeItem: any) => {
+          sizeVarient.push({
+            name: sizeItem.name,
+            price: sizeItem.price,
+            url: sizeItem.url,
+          });
+        });
+        this.CurMenuList.push({
+          commonFoodDetail: {
+            name: item.name,
+            price: item.price,
+            url: item.url,
+          },
+          sizeVarient: sizeVarient
+        });
+      });
+
+      response.Addons.forEach((item: any, index: number) => {
+        let sizeVarient: CommonFoodDetail[] = [];
+        item.sizeVarient.forEach((sizeItem: any) => {
+          sizeVarient.push({
+            name: sizeItem.name,
+            price: sizeItem.price,
+            url: sizeItem.url,
+          });
+        });
+        this.AddMenuList.push({
           commonFoodDetail: {
             name: item.name,
             price: item.price,
@@ -154,9 +226,21 @@ export class FoodMenusComponent implements AfterViewInit {
         this.disableIndianPrev = scrollLeft <= 0;
         this.disableIndianNext = scrollLeft >= maxScroll - 0.5;
       break;
-      case 'ot':
-        this.disableOtherPrev = scrollLeft <= 0;
-        this.disableOtherNext = scrollLeft >= maxScroll - 0.5;
+      case 'man':
+        this.disableMandiPrev = scrollLeft <= 0;
+        this.disableMandiNext = scrollLeft >= maxScroll - 0.5;
+      break;
+      case 'br':
+        this.disableBrPrev = scrollLeft <= 0;
+        this.disableBrNext = scrollLeft >= maxScroll - 0.5;
+      break;
+      case 'cur':
+        this.disableCurPrev = scrollLeft <= 0;
+        this.disableCurNext = scrollLeft >= maxScroll - 0.5;
+      break;
+      case 'add':
+        this.disableAddPrev = scrollLeft <= 0;
+        this.disableAddNext = scrollLeft >= maxScroll - 0.5;
     }
   }
 
@@ -164,6 +248,7 @@ export class FoodMenusComponent implements AfterViewInit {
     this.SelectedCusine = cusine;
     this.SelectedItem = item;
     this.SelectedSizeItemToDisplay = item.sizeVarient[0];
+    this.SelectedSize = item.sizeVarient.length === 3 ? 'Q' : 'H';
     $('#selectedItemModel').modal('show');
   }
 
@@ -175,7 +260,7 @@ export class FoodMenusComponent implements AfterViewInit {
   }
 
   cancelItem() {
-    this.SelectedSize = 'S';
+    this.SelectedSize = 'H';
     this.SelectedCusine = '';
     $('#selectedItemModel').modal('hide');
   }
