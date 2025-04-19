@@ -1,6 +1,7 @@
 import { AfterContentChecked, AfterViewChecked, Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MainService } from '../main.service';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +11,7 @@ import { MainService } from '../main.service';
 })
 export class NavbarComponent implements OnInit {
   HambugerMenu!:any;
+  logoUrl = environment.logoUrl;
 
   constructor(public _mainService: MainService, private router: Router) {}
   ngOnInit(): void {

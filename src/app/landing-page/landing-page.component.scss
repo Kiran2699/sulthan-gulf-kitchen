@@ -2,7 +2,7 @@
     margin-top: 70px;
 
     .bannerWrapper {
-        background-image: url('../../assets/Images/banner.jpg');
+        background-image: var(--banner-url);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: 75%;
