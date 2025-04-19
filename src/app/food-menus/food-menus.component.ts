@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../environment';
 declare var $: any;
 
 export type foodMenuDetail = {
@@ -34,6 +35,7 @@ export class FoodMenusComponent implements AfterViewInit {
   SelectedCusine = '';
   SelectedSize = 'H';
   SelectedSizeItemToDisplay!: CommonFoodDetail;
+  MenuUrlPrefix = environment.menuUrlPrefix;
 
   ArabicMenuList: foodMenuDetail[] = [];
   disableArabicPrev = true;

@@ -3,55 +3,55 @@
         {
             "name": "4 sea bass biriyani",
             "price": "120",
-            "url": "assets/Images/menu/arabic/4-sea-bass-briyani-arab-sty.svg",
+            "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/arabic/4-sea-bass-briyani-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "6 sea bass half salmon",
             "price": "180",
-            "url": "assets/Images/menu/arabic/6-sea-bass-half-salmon-arab-sty.svg",
+            "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/arabic/6-sea-bass-half-salmon-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "1/4 lamb biriyani",
             "price": "120",
-            "url": "assets/Images/menu/arabic/quarter-lamb-briyani-arab-sty.svg",
+            "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/arabic/quarter-lamb-briyani-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "Whole goat",
             "price": "260",
-            "url": "assets/Images/menu/arabic/whole-goat-arab-sty.svg",
+            "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/arabic/whole-goat-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "Whole lamb biriyani",
             "price": "250",
-            "url": "assets/Images/menu/arabic/whole-lamb-briyani-arab-sty-280p.svg",
+            "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/arabic/whole-lamb-briyani-arab-sty-280p.svg",
             "sizeVarient": []
         },
         {
             "name": "Whole lamb biriyani (XL)",
             "price": "300",
-            "url": "assets/Images/menu/arabic/whole-lamb-briyani-arab-sty-300p.svg",
+            "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/arabic/whole-lamb-briyani-arab-sty-300p.svg",
             "sizeVarient": []
         },
         {
             "name": "Whole lamb non grilled",
             "price": "280",
-            "url": "assets/Images/menu/arabic/whole-lamb-non-grilled-arab-sty.svg",
+            "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/arabic/whole-lamb-non-grilled-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "Whole lamb white rice",
             "price": "300",
-            "url": "assets/Images/menu/arabic/whole-lamb-white-rice-arab-sty.svg",
+            "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/arabic/whole-lamb-white-rice-arab-sty.svg",
             "sizeVarient": []
         },
         {
             "name": "1 arm lamb biriyani",
             "price": "49.99",
-            "url": "assets/Images/menu/arabic/1-arm-lamb-briyani.svg",
+            "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/arabic/1-arm-lamb-briyani.svg",
             "sizeVarient": []
         }
     ],
@@ -59,34 +59,34 @@
         {
             "name": "whole lamb biriyani",
             "price": "170",
-            "url": "assets/Images/menu/indian/whole-lamb-briyani-ind-sty.svg",
+            "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/indian/whole-lamb-briyani-ind-sty.svg",
             "sizeVarient": [
                 {
                     "name": "half",
                     "price": "170",
-                    "url": "assets/Images/menu/indian/whole-lamb-briyani-ind-sty.svg"
+                    "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/indian/whole-lamb-briyani-ind-sty.svg"
                 },
                 {
                     "name": "full",
                     "price": "300",
-                    "url": "assets/Images/menu/indian/whole-lamb-briyani-ind-sty.svg"
+                    "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/indian/whole-lamb-briyani-ind-sty.svg"
                 }
             ]
         },
         {
             "name": "whole lamb mandi",
             "price": "170",
-            "url": "assets/Images/menu/indian/whole-lamb-mandi-ind-sty.svg",
+            "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/indian/whole-lamb-mandi-ind-sty.svg",
             "sizeVarient": [
                 {
                     "name": "half",
                     "price": "170",
-                    "url": "assets/Images/menu/indian/whole-lamb-mandi-ind-sty.svg"
+                    "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/indian/whole-lamb-mandi-ind-sty.svg"
                 },
                 {
                     "name": "full",
                     "price": "300",
-                    "url": "assets/Images/menu/indian/whole-lamb-mandi-ind-sty.svg"
+                    "url": "https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/indian/whole-lamb-mandi-ind-sty.svg"
                 }
             ]
         }
