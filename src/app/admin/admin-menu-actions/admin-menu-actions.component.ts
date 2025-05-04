@@ -101,7 +101,7 @@ export class AdminMenuActionsComponent implements OnInit {
     const createdDate = new Date().toLocaleDateString('en-GB');
     formValues.createdDate = createdDate;
     formValues.modifiedDate = null;
-    this._mainService.addMenuItem(environment.foodMenuColl, formValues)
+    this._mainService.addData(environment.foodMenuColl, formValues)
     .then(docRef => {
       this._mainService.AlertText = `<div class="alert alert-success" role="alert">Menu added sucessfully</div>`;
       this._mainService.hideSnackBar(3000);

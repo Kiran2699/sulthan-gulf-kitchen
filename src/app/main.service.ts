@@ -16,10 +16,11 @@ export class MainService {
   IsAdmin = false;
   IsLoading = false;
   AlertText = '';
+  HideNavbar = false;
 
   constructor(private _http: HttpClient, private _firestore: Firestore) { }
 
-  async addMenuItem(collectionName: string, data: any) {
+  async addData(collectionName: string, data: any) {
     this.IsLoading = true;
     const collectionRef = collection(this._firestore, collectionName);
     const docData =  await addDoc(collectionRef, data);
@@ -66,9 +67,4 @@ export class MainService {
       this.AlertText = '';
     }, timems);
   }
-
-  getPartyOrderData = (): Observable<any> => this._http.get<any>(this.PartyMenuData)
-
-  getRetailOrderData = (): Observable<any> => this._http.get<any>(this.RetailMenuData);
-  
 }
