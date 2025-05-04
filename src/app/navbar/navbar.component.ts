@@ -21,6 +21,8 @@ export class NavbarComponent implements OnInit {
         document.getElementById('hamb-container')?.classList.remove('open');
         document.getElementById('side-menu-wrapper')?.classList.remove('open');
         document.getElementById('backdrop')?.classList.remove('open');
+        
+        this._mainService.IsAdmin = event.url.includes('/admin') ? true : false;
       }
     });
   }

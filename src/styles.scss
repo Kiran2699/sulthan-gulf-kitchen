@@ -1,7 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --banner-url: url('https://github.com/Kiran2699/clients-assets/blob/main/sulthan-gulf-kitchen/Images/banner.jpg?raw=true');
-  }
+    font-size: 14px;
+
+    @media (max-width: 600px) {
+        font-size: 12px;
+    }
+}
 
 body {
     color: #2b2b2b;
