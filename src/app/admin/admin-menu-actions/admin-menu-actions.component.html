@@ -1,6 +1,6 @@
 <section name="food-menu-actions" class="food-menu-actions">
     <div class="ContactUsWrapper">
-        <form [formGroup]="MenuDetaiForm">
+        <form [formGroup]="MenuDetaiForm" (submit)="onSubmit()">
             <span class="inputLabel">Item Name</span>
             <div class="input-group">
                 <input type="text" formControlName="name" class="form-control" placeholder="eg: chicken mandi">

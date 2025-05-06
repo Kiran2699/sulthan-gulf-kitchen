@@ -35,7 +35,6 @@ export class AdminMenuActionsComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.PreviousData) {
-      var sizevar: FormArray<FormGroup<any>>;
       this.MenuDetaiForm = this.fb.group({
         name: new FormControl(this.PreviousData.name, Validators.required),
         type: new FormControl(this.PreviousData.type, Validators.required),
@@ -86,7 +85,7 @@ export class AdminMenuActionsComponent implements OnInit {
     formValues.modifiedDate = modifiedDate;
     formValues.createdDate = this.PreviousData.createdDate;
     formValues.id = this.PreviousData.id;
-    this._mainService.updateData(this.PreviousData.id, formValues)
+    this._mainService.updateData(environment.foodMenuColl, this.PreviousData.id, formValues)
     .then(docRef => {
       this._mainService.AlertText = `<div class="alert alert-success" role="alert">Menu updated sucessfully</div>`;
       this._mainService.hideSnackBar(3000);
@@ -160,7 +159,6 @@ export class AdminMenuActionsComponent implements OnInit {
         this.addMenuData(formValues);
       }
       else {
-        console.log(formValues);
         this.updateMenuData(formValues);
       }
       this.IsMenuModified.emit();
@@ -168,7 +166,7 @@ export class AdminMenuActionsComponent implements OnInit {
   }
 
   deleteRecord() {
-    this._mainService.deleteData(this.PreviousData.id)
+    this._mainService.deleteData(environment.foodMenuColl, this.PreviousData.id)
     .then(docRef => {
       this._mainService.AlertText = `<div class="alert alert-success" role="alert">Menu deleted sucessfully</div>`;
       this._mainService.hideSnackBar(3000);

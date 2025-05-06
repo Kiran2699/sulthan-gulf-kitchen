@@ -11,6 +11,7 @@ export const environment = {
   },
   foodMenuColl: 'food-menu',
   usersColl: 'users',
+  stocksColl: 'stocks',
   logoUrl: 'https://github.com/Kiran2699/clients-assets/blob/main/sulthan-gulf-kitchen/Images/logo.PNG?raw=true',
   menuUrlPrefix: 'https://raw.githubusercontent.com/Kiran2699/clients-assets/refs/heads/main/sulthan-gulf-kitchen/Images/menu/',
   retailMenuData: `/assets/retail-menu.json`,

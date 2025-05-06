@@ -4,7 +4,7 @@ import { MainService } from '../main.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../environment';
 import { CommonModule } from '@angular/common';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent {
   logoUrl = environment.logoUrl;
   IsRegister = false;
    
-  constructor(private router: Router, private _mainService: MainService, private fb: FormBuilder) {
+  constructor(private router: Router, private _mainService: MainService, private fb: FormBuilder, private _auth: Auth) {
     router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         _mainService.HideNavbar = event.url.includes('/login') ? true : false;
@@ -47,17 +47,35 @@ export class LoginComponent {
   doLoginSignUp() {
     const formValues = this.LoginSignUpForm.value;
     formValues.usertype = this._mainService.IsAdmin ? 'A' : 'C';
-    this.LoginSignUpForm.reset();
     if (this.IsRegister && !this._mainService.IsAdmin) {
       this.doRegister(formValues);
     }
-    console.log(formValues);
+    else {
+      this._mainService.doLogin(formValues.email, formValues.password, formValues.usertype).subscribe(user => {
+        if (user.length > 0) {
+          this._mainService.CurrentLoggedInUser = user[0];
+          localStorage.setItem('token', JSON.stringify(this._mainService.CurrentLoggedInUser));
+          this._mainService.CurrentUserRole = this._mainService.CurrentLoggedInUser.usertype;
+          if (!this._mainService.IsAdmin) {
+            this.router.navigate(['/orders']);
+          }
+          else {
+            this.router.navigate(['admin/stocks']);
+          }
+          this.LoginSignUpForm.reset();
+        }
+        else {
+          this._mainService.AlertText = `<div class="alert alert-danger" role="alert">User not found!</div>`;
+          this._mainService.hideSnackBar(5000);
+        }
+      });
+    }
   }
 
   doRegister(formValues: any) {
-    const createdDate = new Date().toLocaleDateString('en-GB');
     formValues.orders = [];
-    formValues.createdDate = createdDate;
+    formValues.createdDate = this._mainService.CurrFormatedDate;
+    this.LoginSignUpForm.reset();
     this._mainService.addData(environment.usersColl, formValues)
     .then(docRef => this.IsRegister = false)
     .catch(err => {

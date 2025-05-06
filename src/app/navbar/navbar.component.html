@@ -4,7 +4,7 @@
       <div class="h-100 w-100 d-flex align-items-center justify-content-between">
         <div class="logo-wrapper">
             <span class="logo-container">
-                <img [src]="logoUrl" class="logo" alt="logo">
+                <img [src]="logoUrl" routerLink="/home" class="logo" alt="logo">
             </span>
         </div>
         <div class="d-flex align-items-center">
@@ -17,11 +17,13 @@
                   <li class="dropdown-item" ariaCurrentWhenActive="page" [queryParams]="{ type: 'P' }" routerLink="/menu">Party Order</li>
                 </ul>
               </div>
+              <!-- <a class="navbar-links" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/orders">Orders</a> -->
               <a class="navbar-links" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/contact-us">Contact Us</a>
             }
             @else {
               <a class="navbar-links" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/admin/food-menu">Menu</a>
-              <a class="navbar-links" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/admin/food-orders">Orders</a>
+              <!-- <a class="navbar-links" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/admin/food-orders">Users Orders</a> -->
+              <a class="navbar-links" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/admin/stocks">Stocks</a>
             }
         </div>
       </div>
@@ -35,7 +37,7 @@
       <div class="h-100 w-100 d-flex align-items-center justify-content-between position-relative">
         <div class="logo-wrapper">
             <span class="logo-container">
-              <img [src]="logoUrl" class="logo" alt="logo">
+              <img [src]="logoUrl" routerLink="/home" class="logo" alt="logo">
             </span>
         </div>
         <div class="d-flex align-items-center">
@@ -64,11 +66,13 @@
   <div class="sideMenuWrapper" id="side-menu-wrapper">
     @if (!_mainService.IsAdmin) {
       <a class="sideMenuLinks" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/home">Home</a>
+      <!-- <a class="sideMenuLinks" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/orders">Orders</a> -->
       <a class="sideMenuLinks" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/contact-us">Contact Us</a>
     }
     @else {
       <a class="sideMenuLinks" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/admin/food-menu">Menu</a>
-      <a class="sideMenuLinks" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/admin/food-orders">Orders</a>
+      <!-- <a class="sideMenuLinks" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/admin/food-orders">User Orders</a> -->
+      <a class="sideMenuLinks" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/admin/stocks">Stocks</a>
     }
   </div>
 
