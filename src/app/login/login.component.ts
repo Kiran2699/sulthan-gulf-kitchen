@@ -60,7 +60,7 @@ export class LoginComponent {
             this.router.navigate(['/orders']);
           }
           else {
-            this.router.navigate(['admin/stocks']);
+            this.router.navigate(['admin/users']);
           }
           this.LoginSignUpForm.reset();
         }
@@ -75,6 +75,7 @@ export class LoginComponent {
   doRegister(formValues: any) {
     formValues.orders = [];
     formValues.createdDate = this._mainService.CurrFormatedDate;
+    formValues.createdBy = 'customer';
     this.LoginSignUpForm.reset();
     this._mainService.addData(environment.usersColl, formValues)
     .then(docRef => this.IsRegister = false)

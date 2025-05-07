@@ -70,7 +70,13 @@ export class MainService {
   getItems(type: string): Observable<any[]> {
     this.IsLoading = true;
     const itemsRef = collection(this._firestore, 'food-menu');
-    let queryStr = query(itemsRef, where('type', '==', type));
+    let queryStr;
+    if (type == 'A') {
+      queryStr = query(itemsRef);
+    }
+    else {
+      queryStr = query(itemsRef, where('type', '==', type));
+    }
     const collData = collectionData(queryStr, { idField: 'id' });
     this.IsLoading = false;
     return collData;
@@ -87,6 +93,14 @@ export class MainService {
       queryStr = query(itemsRef, where('date', '==', fromDte), orderBy('Document ID', 'desc'));
     }
     const collData = collectionData(queryStr, { idField: 'id' });
+    this.IsLoading = false;
+    return collData;
+  }
+
+  getUsers(): Observable<any[]> {
+    this.IsLoading = true;
+    const itemsRef = collection(this._firestore, 'users');
+    const collData = collectionData(itemsRef, { idField: 'id' });
     this.IsLoading = false;
     return collData;
   }
