@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --banner-url: url('https://github.com/Kiran2699/clients-assets/blob/main/sulthan-gulf-kitchen/Images/banner.jpg?raw=true');
+    --banner-url: url('https://firebasestorage.googleapis.com/v0/b/testing-app-480e1.firebasestorage.app/o/app-images%2Fbanner.jpg?alt=media');
+    --site-active-color: #dc981b;
     font-size: 13px;
 
     @media (max-width: 600px) {
@@ -15,8 +16,15 @@ body {
     height: calc(100% - 70px)!important;
 }
 
+.btn-app-primary {
+    background-color: var(--site-active-color)!important;
+    color: #fff!important;
+    font-weight: 600;
+    letter-spacing: .8px;
+}
+
 .btnPrimary {
-    background-color: #dc981b;
+    background-color: var(--site-active-color);
     color: #fff;
 }
 

@@ -24,7 +24,7 @@ export class AdminFoodMenuComponent {
   }
 
   getData() {
-    this._mainService.getItems("A").subscribe((res: any[]) => {
+    this._mainService.getItems().subscribe((res: any[]) => {
       if (res) {
         this.PartyMenuItems = res.filter((datum) => datum.type === "P");
         this.RetailMenuItems = res.filter((datum) => datum.type === "R");

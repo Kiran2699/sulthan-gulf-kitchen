@@ -3,13 +3,13 @@
         <div class="card-header d-flex justify-content-between align-items-center">
           <span class="fs-6 fw-bolder text-muted">Stocks List</span>
           @if (ShowAddItemBtn) {
-            <button class="btn btn-outline-primary d-flex align-items-center" (click)="ShowAddItemBtn = false;IsEditMode = false;generateForm()">
+            <button class="btn btn-outline-primary d-flex align-items-center" (click)="onAddItem()">
                 <i class="fa-solid fa-layer-group"></i>
                 <span class="d-inline-block ms-2 fw-bold">Add item</span>
             </button>
           }
           @else {
-            <button class="btn btn-outline-secondary d-flex align-items-center" (click)="this.ShowAddItemBtn = true">
+            <button class="btn btn-outline-secondary d-flex align-items-center" (click)="this.ShowAddItemBtn = true;PreviousData = null">
                 <i class="fa-solid fa-layer-group"></i>
                 <span class="d-inline-block ms-2 fw-bold">Cancel</span>
             </button>

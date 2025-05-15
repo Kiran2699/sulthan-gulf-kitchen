@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MainService } from '../main.service';
-import { environment } from '../../environment';
+import { MainService } from '../../main.service';
+import { environment } from '../../../environment';
 
 @Component({
   selector: 'app-admin-stocks',
@@ -21,9 +21,7 @@ export class AdminStocksComponent implements OnInit {
   RefundStat = ['not applicable', 'received refund', 'waiting for refund'];
   checkRefundText = 'waiting for refund';
 
-  constructor(private fb: FormBuilder, public _mainService: MainService) {
-    
-  }
+  constructor(private fb: FormBuilder, public _mainService: MainService) {}
 
   ngOnInit(): void {
     this.getStocks('', '');
@@ -97,6 +95,13 @@ export class AdminStocksComponent implements OnInit {
     this.generateForm();
   }
 
+  onAddItem() {
+    this.PreviousData = null;
+    this.ShowAddItemBtn = false;
+    this.IsEditMode = false;
+    this.generateForm();
+  }
+
   onSubmit() {
     const formValues = this.StockDetailForm.value;
     if (!this.IsEditMode) {
@@ -107,12 +112,12 @@ export class AdminStocksComponent implements OnInit {
     }
     this.ShowAddItemBtn = true;
     this.IsEditMode = false;
+    this.PreviousData = null;
   }
 
   addData(formValues: any) {
     this._mainService.addData(environment.stocksColl, formValues)
     .then(docRef => {
-      console.log(docRef);
       this.constructTableElements(formValues);
       this._mainService.AlertText = `<div class="alert alert-success" role="alert">Stock's added sucessfully</div>`;
       this._mainService.hideSnackBar(3000);
@@ -145,5 +150,8 @@ export class AdminStocksComponent implements OnInit {
       this._mainService.AlertText = `<div class="alert alert-danger" role="alert"> Woops! Something wrong.</div>`;
       this._mainService.hideSnackBar(5000);
     });
+    this.ShowAddItemBtn = true;
+    this.IsEditMode = false;
+    this.PreviousData = null;
   }
 }
