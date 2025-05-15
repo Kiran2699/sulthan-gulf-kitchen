@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from '../environment';
 import { Firestore, collection, addDoc, doc, collectionData, where, query, updateDoc, deleteDoc } from '@angular/fire/firestore';
@@ -12,17 +12,16 @@ import { getDoc, orderBy, QueryConstraint } from 'firebase/firestore';
 export class MainService {
   IsMobile = false;
   SelectedItem = new BehaviorSubject<any[] | null>(null);
-  RetailMenuData = environment.retailMenuData;
-  PartyMenuData = environment.partyMenuData;
   IsAdmin = false;
   IsLoading = false;
   AlertText = '';
   HideNavbar = false;
   CurrentLoggedInUser!: any;
   CurrentUserRole = '';
-  CurrFormatedDate = new Date().toLocaleDateString('en-GB')
-
-  constructor(private _http: HttpClient, private _firestore: Firestore, private router: Router) { }
+  CurrFormatedDate = new Date().toLocaleDateString('en-GB');
+  private _firestore = inject(Firestore);
+  private _http = inject(HttpClient);
+  private router = inject(Router);
 
   doLogin(email: string, password: string, type: string): Observable<any[]> {
     this.IsLoading = true;
@@ -31,8 +30,8 @@ export class MainService {
       where('usertype', '==', type), 
       where('email', '==', email),
       where('password', '==', password));
-    const collData = collectionData(queryStr).pipe(
-      map(users => users.map(({ orders, password, createdDate, phone, ...rest }) => rest))
+    const collData = collectionData(queryStr, { idField: 'id' }).pipe(
+      map(users => users.map(({ orders, password, createdDate, ...rest }) => rest))
     );
     this.IsLoading = false;
     return collData;
@@ -67,16 +66,10 @@ export class MainService {
     return docData;
   }
 
-  getItems(type: string): Observable<any[]> {
+  getItems(): Observable<any[]> {
     this.IsLoading = true;
     const itemsRef = collection(this._firestore, 'food-menu');
-    let queryStr;
-    if (type == 'A') {
-      queryStr = query(itemsRef);
-    }
-    else {
-      queryStr = query(itemsRef, where('type', '==', type));
-    }
+    let queryStr = query(itemsRef);
     const collData = collectionData(queryStr, { idField: 'id' });
     this.IsLoading = false;
     return collData;

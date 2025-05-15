@@ -74,6 +74,7 @@ export class LoginComponent {
 
   doRegister(formValues: any) {
     formValues.orders = [];
+    formValues.cart = [];
     formValues.createdDate = this._mainService.CurrFormatedDate;
     formValues.createdBy = 'customer';
     this.LoginSignUpForm.reset();

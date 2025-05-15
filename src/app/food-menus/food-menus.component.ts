@@ -1,27 +1,36 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainService } from '../main.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute } from '@angular/router';
-import { environment } from '../../environment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { switchMap } from 'rxjs';
 declare var $: any;
 
 @Component({
   selector: 'app-food-menus',
-  imports: [CommonModule, MatTabsModule, MatButtonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, FormsModule,  MatTabsModule, MatButtonModule, MatCardModule, MatIconModule, MatAutocompleteModule, MatFormFieldModule, MatInputModule],
   templateUrl: './food-menus.component.html',
   styleUrl: './food-menus.component.scss'
 })
 
-export class FoodMenusComponent implements AfterViewInit {
-  MenuType: 'P' | 'R' = 'P';
+export class FoodMenusComponent implements OnInit {
+  private activatedRoute =  inject(ActivatedRoute);
+  private _mainService =  inject(MainService);
+  private _router =  inject(Router);
+  
+  MenuType = '';
+  AllMenuApiRes!: any;
   SelectedItem!: any;
   SelectedSize = 'Q';
   SelectedSizeItemToDisplay!: any;
-  MenuUrlPrefix = environment.menuUrlPrefix;
+  UserCart: any[] = [];
 
   ArabicMenuList: any[] = [];
   disableArabicPrev = true;
@@ -43,30 +52,34 @@ export class FoodMenusComponent implements AfterViewInit {
   disableAddPrev = true;
   disableAddNext = false;
 
-  constructor(private _mainService: MainService, private activatedRoute: ActivatedRoute) {
+  constructor() {
     this.activatedRoute.queryParams.subscribe(params => {
       this.MenuType = params['type'] && params['type'] != '' ? params['type'] : 'P';
       this.structureData();
     });
   }
 
-  ngAfterViewInit(): void {
-    
+  ngOnInit(): void {
+    this._mainService.getItems().subscribe(res => {
+      this.AllMenuApiRes = res;
+      this.structureData();
+    });
   }
 
   structureData() {
-    this.ArabicMenuList = [];
-    this.IndianMenuList = [];
-    this.BrMenuList = [];
-    this.CurMenuList = [];
-    this.AddMenuList = [];
-    this._mainService.getItems(this.MenuType).subscribe(response => {
-      this.ArabicMenuList = response.filter((res: any) => res.cusine === 'arabic');
-      this.IndianMenuList = response.filter((res: any) => res.cusine === 'indian');
-      this.BrMenuList = response.filter((res: any) => res.cusine === 'biriyani');
-      this.CurMenuList = response.filter((res: any) => res.cusine === 'curry');
-      this.AddMenuList = response.filter((res: any) => res.cusine === 'addons');
-    });
+    if (this.AllMenuApiRes) {
+      const currentFeatureArr = this.AllMenuApiRes.filter((res: any) => res.type === this.MenuType);
+      this.ArabicMenuList = [];
+      this.IndianMenuList = [];
+      this.BrMenuList = [];
+      this.CurMenuList = [];
+      this.AddMenuList = [];
+      this.ArabicMenuList = currentFeatureArr.filter((res: any) => res.cusine === 'arabic');
+      this.IndianMenuList = currentFeatureArr.filter((res: any) => res.cusine === 'indian');
+      this.BrMenuList = currentFeatureArr.filter((res: any) => res.cusine === 'biriyani');
+      this.CurMenuList = currentFeatureArr.filter((res: any) => res.cusine === 'curry');
+      this.AddMenuList = currentFeatureArr.filter((res: any) => res.cusine === 'addons');
+    }
   }
 
   scroll(direction: 'left' | 'right', element: HTMLDivElement, menuHeader: string) {
@@ -78,7 +91,6 @@ export class FoodMenusComponent implements AfterViewInit {
   updateButtonState(el: HTMLDivElement, menuHeader: string) {
     const maxScroll = el.scrollWidth - el.clientWidth;
     const scrollLeft = el.scrollLeft;
-    console.log(el, menuHeader);
     switch (menuHeader) {
       case 'arabic':
         this.disableArabicPrev = scrollLeft <= 0;
@@ -103,10 +115,12 @@ export class FoodMenusComponent implements AfterViewInit {
   }
 
   selectItem(item: any) {
-    this.SelectedSizeItemToDisplay = item.sizevar[0];
-    this.SelectedItem = item;
-    this.SelectedSize = item.sizevar.length === 3 ? 'Q' : 'H';
-    $('#selectedItemModel').modal('show');
+    if (this.MenuType == 'R') {
+      this.SelectedSizeItemToDisplay = item.sizevar[0];
+      this.SelectedItem = item;
+      this.SelectedSize = item.sizevar.length === 3 ? 'Q' : 'H';
+      $('#selectedItemModel').modal('show');
+    }
   }
 
   selectSize(size: string, index: number) {
@@ -122,6 +136,16 @@ export class FoodMenusComponent implements AfterViewInit {
   }
 
   addItem() {
+    const quantValue = document.getElementById('itemQuantity') as HTMLInputElement;
+    this.SelectedSizeItemToDisplay.quantity = quantValue.value.toString();
+    this.SelectedSizeItemToDisplay.name = this.SelectedItem.name;
+    this.UserCart.push(this.SelectedSizeItemToDisplay);
+    $('#selectedItemModel').modal('hide');
+    quantValue.value = '1';
+  }
 
+  viewCart() {
+    localStorage.setItem('cartItems', JSON.stringify(this.UserCart));
+    this._router.navigate(['cart']);
   }
 }

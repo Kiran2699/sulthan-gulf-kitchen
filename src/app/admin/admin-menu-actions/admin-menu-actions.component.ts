@@ -84,7 +84,6 @@ export class AdminMenuActionsComponent implements OnInit {
         fileName: this.PreviousData.sizevar[index].fileName,
         index: index
       });
-      console.log(this.TempImageStorage);
     }
   }
 

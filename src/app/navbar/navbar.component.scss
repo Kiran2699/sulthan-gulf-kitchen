@@ -37,7 +37,7 @@
 
         &:hover, &.active {
             text-decoration: underline;
-            color: #dc981b;
+            color: var(--site-active-color);
         }
     }
 }

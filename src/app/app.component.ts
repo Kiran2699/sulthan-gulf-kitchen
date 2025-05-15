@@ -19,6 +19,9 @@ export class AppComponent {
   title = 'sulthan-gulf-kitchen';
 
   constructor(public mainService: MainService) {
-    
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.mainService.CurrentLoggedInUser = JSON.parse(token);
+    }
   }
 }
