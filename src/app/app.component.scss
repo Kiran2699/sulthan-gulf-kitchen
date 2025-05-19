@@ -12,7 +12,7 @@
 }
 
 ::ng-deep .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic{
-    stroke: #dc981b!important;
+    stroke: var(--site-active-color)!important;
 }
 
 .app-main-alert {
@@ -22,4 +22,8 @@
     z-index: 999;
     min-width: 200px;
     max-width: 100%;
+
+    @media (max-width: 600px) {
+        min-width: calc(100% - 40px);
+    }
 }

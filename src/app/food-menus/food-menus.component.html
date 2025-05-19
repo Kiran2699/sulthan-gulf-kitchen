@@ -1,6 +1,9 @@
 <main class="foodMenu commonContentHeight p-3 me-sm-3 mr-md-0 p-lg-5">
     @if (MenuType == 'P') {
         <span class="menu-header">Party Order</span>
+        <div class="alert alert-info" role="alert">
+            We are not accepting online party orders at the moment; however, you can still contact the kitchen for party order information..
+        </div>
         <mat-tab-group>
             <mat-tab label="Arabic">
                 @if (ArabicMenuList.length > 0) {
@@ -53,7 +56,7 @@
     @else {
         <span class="menu-header mb-3">Retail Order</span>
         <div class="alert alert-info" role="alert">
-            We are currently unable to accept retail orders.
+            We are currently unable to accept card payments, but we do accept cash on delivery.
         </div>
         <mat-tab-group>
             <mat-tab label="Arabic">
@@ -174,6 +177,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="mt-3 d-flex align-items-center">
+                            <span class="fw-bold">Quantity:</span>
+                            <input type="number" value="1" id="itemQuantity" class="form-control w-25 ms-2">
+                        </div>
                         <div class="item-name px-3 d-flex justify-content-around align-items-center" *ngIf="SelectedItem.sizevar.length == 2">
                             <button class="sizeVarBtn" [ngClass]="{ 'active': SelectedSize == 'H' }" (click)="selectSize('H', 0)">Half</button>
                             <button class="sizeVarBtn" [ngClass]="{ 'active': SelectedSize == 'F' }" (click)="selectSize('F', 1)">Full</button>
@@ -194,3 +201,17 @@
         </div>
     }
 </main>
+
+@if (UserCart.length > 0) {
+    <div class="cart-alert-main">
+        <div class="cart-alert d-flex justify-content-between align-items-center">
+            <div class="cart-alert-item d-flex align-items-center">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="ms-3">{{ UserCart.length }} {{ UserCart.length == 1 ? 'Item' : 'Items' }} Added</span>
+            </div>
+            <div class="card-button">
+                <button type="button" class="btn btn-outline-light" (click)="viewCart()">view</button>
+            </div>
+        </div>
+    </div>
+}

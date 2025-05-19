@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AdminMenuActionsComponent } from '../admin-menu-actions/admin-menu-actions.component';
-import { MainService } from '../../main.service';
+import { MainService } from '../../services/main.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,13 +18,14 @@ export class AdminFoodMenuComponent {
   PartyMenuItems!: any[];
   RetailMenuItems!: any[];
   PreviousData!: any[];
+  private _mainService = inject(MainService);
 
-  constructor(private _mainService: MainService){
+  constructor(){
     this.getData();
   }
 
   getData() {
-    this._mainService.getItems("A").subscribe((res: any[]) => {
+    this._mainService.getItems().subscribe((res: any[]) => {
       if (res) {
         this.PartyMenuItems = res.filter((datum) => datum.type === "P");
         this.RetailMenuItems = res.filter((datum) => datum.type === "R");

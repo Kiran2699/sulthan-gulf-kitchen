@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output, output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from '@angular/fire/storage';
 import { Storage } from '@angular/fire/storage';
-import { MainService } from '../../main.service';
+import { MainService } from '../../services/main.service';
 import { environment } from '../../../environment';
 
 
@@ -14,6 +14,9 @@ import { environment } from '../../../environment';
   styleUrl: './admin-menu-actions.component.scss'
 })
 export class AdminMenuActionsComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private storage = inject(Storage);
+  private _mainService = inject(MainService);
   MenuDetaiForm!: FormGroup;
   SizeOptions = [
     {name: 'Quater', value: 'Q', isChecked: true, isDisabled: false}, 
@@ -25,11 +28,12 @@ export class AdminMenuActionsComponent implements OnInit {
   Cusines = ['arabic', 'indian', 'biriyani', 'curry', 'addons'];
   AllowedSizes = 3;
   ImageError = false;
+  TempImageStorage: {fileName: string, index: number}[] = [];
   @Input() IsEditMode = false;
   @Input() PreviousData!: any;
   @Output() IsMenuModified = new EventEmitter<void>();
 
-  constructor(private fb: FormBuilder, private storage: Storage, public _mainService: MainService) {
+  constructor() {
     
   }
 
@@ -77,6 +81,12 @@ export class AdminMenuActionsComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.items.at(index).patchValue({ image: file });
+    }
+    if (this.IsEditMode) {
+      this.TempImageStorage.push({
+        fileName: this.PreviousData.sizevar[index].fileName,
+        index: index
+      });
     }
   }
 
@@ -157,12 +167,18 @@ export class AdminMenuActionsComponent implements OnInit {
       });
       if (!this.IsEditMode) {
         this.addMenuData(formValues);
+        this.TempImageStorage = [];
       }
       else {
-        this.updateMenuData(formValues);
+        this.deleteFile(this.TempImageStorage, formValues.cusine).then(() => this.updateMenuData(formValues))
+        .catch(() => {
+          this._mainService.AlertText = `<div class="alert alert-danger" role="alert"> Woops! Something wrong, Data not updated.</div>`;
+          this._mainService.hideSnackBar(5000);
+        });
+        this.TempImageStorage = [];
       }
-      this.IsMenuModified.emit();
     });
+    this.IsMenuModified.emit();
   }
 
   deleteRecord() {
@@ -177,20 +193,22 @@ export class AdminMenuActionsComponent implements OnInit {
     });
   }
 
-  async deleteFile() {
-    this.PreviousData.sizevar.forEach(async (datum: any) => {
-      const constructedPath = `${this.PreviousData.cusine}/${datum.fileName}`;
-      const fileRef = ref(this.storage, constructedPath);
-      await deleteObject(fileRef);
-    });
+  async deleteFile(data: any, cusine: string) {
+    if (data.length > 0) {
+      data.forEach(async (datum: any) => {
+        const constructedPath = `${cusine}/${datum.fileName}`;
+        const fileRef = ref(this.storage, constructedPath);
+        await deleteObject(fileRef);
+      });
+    }
   }
 
   onDeleteItem() {
-    this.deleteFile().then(() => this.deleteRecord())
+    this.deleteFile(this.PreviousData.sizevar, this.PreviousData.cusine).then(() => this.deleteRecord())
     .catch(() => {
       this._mainService.AlertText = `<div class="alert alert-danger" role="alert"> Woops! Something wrong, Data not inserted.</div>`;
       this._mainService.hideSnackBar(5000);
     });
     this.IsMenuModified.emit();
-  }  
+  }
 }
