@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
-import { MainService } from '../../main.service';
+import { MainService } from '../../services/main.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { environment } from '../../../environment';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -15,6 +17,10 @@ import { environment } from '../../../environment';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent implements OnInit {
+  private _authService = inject(AuthService);
+  private _mainService = inject(MainService);
+  private _fb = inject(FormBuilder);
+  private _router = inject(Router);
   CartArr: any[] = [];
   DeliveryOptions = [{name: 'Delivery', value: 'D'}, {name: 'Pick Up', value: 'P'}];
   PaymentOptions = [{name: 'Cash On Delivery', value: 'cod'}];
@@ -25,7 +31,7 @@ export class CartComponent implements OnInit {
   SelectedPostCode = '';
   DeliveryFee = environment.deliveryFee;
 
-  constructor(private _mainService: MainService, private _fb: FormBuilder){}
+  constructor(){}
 
   ngOnInit(): void {
     this.generateForm();
@@ -62,6 +68,10 @@ export class CartComponent implements OnInit {
 
   onOrder() {
     const formValues = this.OrderDetailForm.value;
+    const currDate = new Date();
+    const hours = currDate.getHours() > 9 ? '0' + currDate.getHours().toString() : currDate.getHours().toString();
+    const mins = currDate.getMinutes() > 9 ? '0' + currDate.getMinutes().toString() : currDate.getMinutes().toString();
+    const formatedDate = `${currDate.toLocaleDateString('en-GB')} ${hours}:${mins}`
     if (formValues.paymentOption && formValues.paymentOption != '' && 
         formValues.deliveryOption && formValues.deliveryOption != '' && 
         formValues.houseNo && formValues.houseNo != ''&& 
@@ -75,8 +85,8 @@ export class CartComponent implements OnInit {
         deliveryOption: formValues.deliveryOption,
         houseNo: formValues.houseNo,
         location: formValues.location,
-        postocde: formValues.postcode,
-        status: 'P',
+        postcode: formValues.postcode,
+        status: 'Pending Confirmation',
         estimatedDelivery: '',
         actualDelivery: '',
         deliveredBy: '',
@@ -86,9 +96,12 @@ export class CartComponent implements OnInit {
         totalPrice: this.TotalPrice,
         totalPricePaid: '',
         coupenUsed: '',
-        orderDate: new Date(),
-        email: this._mainService.CurrentLoggedInUser.email,
-        phone: this._mainService.CurrentLoggedInUser.phone,
+        orderDate: formatedDate,
+        // email: 'kiranfist@gmail.com',
+        // phone: '07901388979',
+        email: this._authService.CurrentLoggedInUser.email,
+        phone: this._authService.CurrentLoggedInUser.phone,
+        name: this._authService.CurrentLoggedInUser.name,
         order: this.CartArr
       }
       const customerOrderCopy = {
@@ -106,8 +119,11 @@ export class CartComponent implements OnInit {
         totalPricePaid: '',
         order: this.CartArr
       }
-      this.addData(orderRequest, customerOrderCopy);
       localStorage.removeItem('cartItems');
+      this.addData(orderRequest, customerOrderCopy);
+      if (this._authService.CurrentUserRole === 'C') {
+        this._router.navigate(['/orders']);
+      }
     }
     else {
       this._mainService.AlertText = `<div class="alert alert-danger" role="alert">All fields must be filled</div>`;
@@ -118,15 +134,8 @@ export class CartComponent implements OnInit {
   addData(orderVal: any, customerCopy: any) {
     this._mainService.addData(environment.ordersColl, orderVal)
     .then(docRef => {
-      this._mainService.addData(`${environment.usersColl}/${this._mainService.CurrentLoggedInUser.id}/orders`, customerCopy)
-      .then(docRef => {
-        this._mainService.AlertText = `<div class="alert alert-success" role="alert">Food ordered successfully. Check Whatsapp for further updates</div>`;
-        this._mainService.hideSnackBar(3000);
-      })
-      .catch(error => {
-        this._mainService.AlertText = `<div class="alert alert-danger" role="alert"> Woops! Something wrong, Data not inserted.</div>`;
-        this._mainService.hideSnackBar(5000);
-      });
+      this._mainService.AlertText = `<div class="alert alert-success" role="alert">Food ordered successfully. Check Whatsapp for further updates</div>`;
+      this._mainService.hideSnackBar(3000);
     })
     .catch(error => {
       this._mainService.AlertText = `<div class="alert alert-danger" role="alert"> Woops! Something wrong, Data not inserted.</div>`;

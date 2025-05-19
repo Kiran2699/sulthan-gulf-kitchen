@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { environment } from '../environment';
 import { Firestore, collection, addDoc, doc, collectionData, where, query, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { getDoc, orderBy, QueryConstraint } from 'firebase/firestore';
+import { orderBy } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -12,35 +11,14 @@ import { getDoc, orderBy, QueryConstraint } from 'firebase/firestore';
 export class MainService {
   IsMobile = false;
   SelectedItem = new BehaviorSubject<any[] | null>(null);
-  IsAdmin = false;
   IsLoading = false;
   AlertText = '';
   HideNavbar = false;
-  CurrentLoggedInUser!: any;
-  CurrentUserRole = '';
   CurrFormatedDate = new Date().toLocaleDateString('en-GB');
   private _firestore = inject(Firestore);
-  private _http = inject(HttpClient);
-  private router = inject(Router);
+  private _router = inject(Router);
 
-  doLogin(email: string, password: string, type: string): Observable<any[]> {
-    this.IsLoading = true;
-    const itemsRef = collection(this._firestore, 'users');
-    let queryStr = query(itemsRef,
-      where('usertype', '==', type), 
-      where('email', '==', email),
-      where('password', '==', password));
-    const collData = collectionData(queryStr, { idField: 'id' }).pipe(
-      map(users => users.map(({ orders, password, createdDate, ...rest }) => rest))
-    );
-    this.IsLoading = false;
-    return collData;
-  }
-
-  doLogout() {
-    this.CurrentLoggedInUser = null;
-    localStorage.removeItem('token');
-  }
+  constructor() {}
 
   async addData(collectionName: string, data: any) {
     this.IsLoading = true;
@@ -90,14 +68,6 @@ export class MainService {
     return collData;
   }
 
-  getUsers(): Observable<any[]> {
-    this.IsLoading = true;
-    const itemsRef = collection(this._firestore, 'users');
-    const collData = collectionData(itemsRef, { idField: 'id' });
-    this.IsLoading = false;
-    return collData;
-  }
-
   hideSnackBar(timems: number) {
     setTimeout(() => {
       this.AlertText = '';
@@ -118,5 +88,41 @@ export class MainService {
       }
     });
     return formatedData;
+  }
+
+  generateHours() {
+    const hourArr: string[] = [];
+    for (let i = 1; i < 24; i++) {
+      if (i > 9) {
+        hourArr.push(i.toString());
+      }
+      else {
+        hourArr.push(`0${i.toString()}`);
+      }
+    }
+    hourArr.push('00');
+    return hourArr;
+  }
+
+  generateMinutes() {
+    const minArr: string[] = [];
+    for (let i = 1; i <= 60; i++) {
+      if (i > 9) {
+        minArr.push(i.toString());
+      }
+      else {
+        minArr.push(`0${i.toString()}`);
+      }
+    }
+    minArr.push('00');
+    return minArr;
+  }
+
+  navigateToMenu(type: string) {
+    this._router.navigate(['/menu'], {
+      queryParams: {
+        type: type
+      }
+    });
   }
 }

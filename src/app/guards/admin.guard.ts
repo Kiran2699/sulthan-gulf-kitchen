@@ -1,16 +1,16 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { MainService } from '../main.service';
 import { inject } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 export const AdminGuard: CanActivateFn = (route, state) => {
-  const authService = inject(MainService);
+  const authService = inject(AuthService);
   const router = inject(Router);
   const tokentsing = localStorage.getItem('token');
   let tokenData;
   if (tokentsing) {
     tokenData = JSON.parse(tokentsing);
   }
-  const token = authService.CurrentUserRole == 'A' || tokenData.usertype == 'A';
+  const token = authService.CurrentUserRole == 'A' || (tokenData && tokenData.usertype == 'A');
 
   if (token) {
     return true;

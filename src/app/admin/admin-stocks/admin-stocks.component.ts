@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MainService } from '../../main.service';
+import { MainService } from '../../services/main.service';
 import { environment } from '../../../environment';
 
 @Component({
@@ -11,6 +11,8 @@ import { environment } from '../../../environment';
   styleUrl: './admin-stocks.component.scss'
 })
 export class AdminStocksComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private _mainService = inject(MainService);
   ShowAddItemBtn = true;
   IsEditMode = false;
   StocksList: any[] = [];
@@ -21,7 +23,7 @@ export class AdminStocksComponent implements OnInit {
   RefundStat = ['not applicable', 'received refund', 'waiting for refund'];
   checkRefundText = 'waiting for refund';
 
-  constructor(private fb: FormBuilder, public _mainService: MainService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.getStocks('', '');

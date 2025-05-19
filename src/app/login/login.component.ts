@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { MainService } from '../main.service';
+import { MainService } from '../services/main.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../environment';
 import { CommonModule } from '@angular/common';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +17,16 @@ export class LoginComponent {
   LoginSignUpForm!: FormGroup;
   logoUrl = environment.logoUrl;
   IsRegister = false;
+  private _authService = inject(AuthService);
+  private router = inject(Router);
+  private _mainService = inject(MainService);
+  private fb = inject(FormBuilder);
+  private _auth = inject(Auth);
    
-  constructor(private router: Router, private _mainService: MainService, private fb: FormBuilder, private _auth: Auth) {
-    router.events.subscribe((event: any) => {
+  constructor() {
+    this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
-        _mainService.HideNavbar = event.url.includes('/login') ? true : false;
+        this._mainService.HideNavbar = event.url.includes('/login') ? true : false;
         this.LoginSignUpForm = new FormGroup({
           name: new FormControl(''),
           phone: new FormControl(''),
@@ -46,18 +52,22 @@ export class LoginComponent {
 
   doLoginSignUp() {
     const formValues = this.LoginSignUpForm.value;
-    formValues.usertype = this._mainService.IsAdmin ? 'A' : 'C';
-    if (this.IsRegister && !this._mainService.IsAdmin) {
+    formValues.usertype = this._authService.IsAdmin ? 'A' : 'C';
+    if (this.IsRegister && !this._authService.IsAdmin) {
       this.doRegister(formValues);
     }
     else {
-      this._mainService.doLogin(formValues.email, formValues.password, formValues.usertype).subscribe(user => {
+      this._authService.doLogin(formValues.email, formValues.password, formValues.usertype).subscribe(user => {
         if (user.length > 0) {
-          this._mainService.CurrentLoggedInUser = user[0];
-          localStorage.setItem('token', JSON.stringify(this._mainService.CurrentLoggedInUser));
-          this._mainService.CurrentUserRole = this._mainService.CurrentLoggedInUser.usertype;
-          if (!this._mainService.IsAdmin) {
-            this.router.navigate(['/orders']);
+          this._authService.CurrentLoggedInUser = user[0];
+          const currDate = new Date();
+          const tokenExpireAt = new Date();
+          tokenExpireAt.setHours(currDate.getHours() + environment.sessionTimeout);
+          this._authService.CurrentLoggedInUser.tokenExpireAt = tokenExpireAt;
+          localStorage.setItem('token', JSON.stringify(this._authService.CurrentLoggedInUser));
+          this._authService.CurrentUserRole = this._authService.CurrentLoggedInUser.usertype;
+          if (!this._authService.IsAdmin) {
+            this._mainService.navigateToMenu('R');
           }
           else {
             this.router.navigate(['admin/users']);

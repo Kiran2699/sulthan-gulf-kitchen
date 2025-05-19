@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainService } from '../main.service';
+import { MainService } from '../services/main.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -60,6 +60,10 @@ export class FoodMenusComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const cartItems = localStorage.getItem('cartItems');
+    if (cartItems) {
+      this.UserCart = JSON.parse(cartItems);
+    }
     this._mainService.getItems().subscribe(res => {
       this.AllMenuApiRes = res;
       this.structureData();

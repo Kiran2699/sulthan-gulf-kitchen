@@ -9,19 +9,20 @@ import { AdminStocksComponent } from './admin/admin-stocks/admin-stocks.componen
 import { UsersComponent } from './admin/users/users.component';
 import { OrdersListComponent } from './orders/orders-list/orders-list.component';
 import { CartComponent } from './orders/cart/cart.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', redirectTo: '/home', pathMatch: 'full'},
     { path: 'login', component: LoginComponent },
     { path: 'home', component: LandingPageComponent },
     { path: 'menu', component: FoodMenusComponent },
-    { path: 'orders', component: OrdersListComponent },
-    { path: 'cart', component: CartComponent },
+    { path: 'orders', component: OrdersListComponent, canActivate: [AuthGuard] },
+    { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
     { path: 'contact-us', component: ContactUsComponent },
     { path: 'admin/login', component: LoginComponent },
     { path: 'admin/food-menu', component: AdminFoodMenuComponent, canActivate: [AdminGuard] },
     { path: 'admin/users', component: UsersComponent, canActivate: [AdminGuard] },
-    { path: 'admin/food-orders', component: OrdersListComponent, canActivate: [AdminGuard] },
+    { path: 'admin/orders', component: OrdersListComponent, canActivate: [AdminGuard] },
     { path: 'admin/stocks', component: AdminStocksComponent, canActivate: [AdminGuard] },
-    { path: '**', redirectTo: '/home' }
+    { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
