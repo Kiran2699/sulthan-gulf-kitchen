@@ -16,6 +16,7 @@ export const environment = {
   ordersColl: 'orders',
   deliveryFee: '2.50',
   clientPhone: '+447901388979',
+  sessionTimeout: 1, // 1 hour
   logoUrl: 'https://firebasestorage.googleapis.com/v0/b/testing-app-480e1.firebasestorage.app/o/app-images%2Flogo.PNG?alt=media',
   deliveringCity: 
     [

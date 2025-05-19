@@ -1,7 +1,8 @@
-import { AfterContentChecked, AfterViewChecked, Component, HostListener, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, Component, HostListener, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { MainService } from '../main.service';
+import { MainService } from '../services/main.service';
 import { environment } from '../../environment';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,17 +13,20 @@ import { environment } from '../../environment';
 export class NavbarComponent implements OnInit {
   HambugerMenu!:any;
   logoUrl = environment.logoUrl;
+  public _mainService = inject(MainService);
+  private router = inject(Router);
+  public _authService = inject(AuthService);
 
-  constructor(public _mainService: MainService, private router: Router) {}
+  constructor() {}
+
   ngOnInit(): void {
     this.onResize();
+    this._authService.IsAdmin = this.router.url.includes('/admin') ? true : false;
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         document.getElementById('hamb-container')?.classList.remove('open');
         document.getElementById('side-menu-wrapper')?.classList.remove('open');
         document.getElementById('backdrop')?.classList.remove('open');
-        
-        this._mainService.IsAdmin = event.url.includes('/admin') ? true : false;
       }
     });
   }
@@ -43,4 +47,13 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  onLogout() {
+    this._authService.doLogout();
+    if (this._authService.IsAdmin) {
+      this.router.navigate(['/admin/login']);
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
+  }
 }

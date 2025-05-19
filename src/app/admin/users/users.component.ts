@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MainService } from '../../main.service';
+import { MainService } from '../../services/main.service';
 import { environment } from '../../../environment';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -19,15 +20,18 @@ export class UsersComponent implements OnInit {
   UserTypes = [{name: 'Customer', value: 'C'}, {name: 'Admin', value: 'A'}];
   UserDetailForm!: FormGroup;
   PreviousData!: any;
+  private fb = inject(FormBuilder);
+  private _mainService = inject(MainService);
+  private _authService = inject(AuthService);
 
-  constructor(private fb: FormBuilder, public _mainService: MainService) {}
+  constructor() {}
   
   ngOnInit(): void {
     this.getUsers();
   }
 
   getUsers() {
-    this._mainService.getUsers().subscribe({
+    this._authService.getUsers().subscribe({
       next: (res: any[]) => {
         this.CustomerList = res.filter((datum: any) => datum.usertype === 'C');
         this.AdminList = res.filter((datum: any) => datum.usertype === 'A');
