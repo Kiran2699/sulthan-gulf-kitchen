@@ -56,7 +56,7 @@
     @else {
         <span class="menu-header mb-3">Retail Order</span>
         <div class="alert alert-info" role="alert">
-            We are currently unable to accept card payments, but we do accept cash on delivery.
+            At the moment, we're unable to process card payments through the app. However, we're happy to accept bank transfers upon delivery. Thank you for your understanding!
         </div>
         <mat-tab-group>
             <mat-tab label="Arabic">
@@ -181,7 +181,7 @@
                             <span class="fw-bold">Quantity:</span>
                             <input type="number" value="1" id="itemQuantity" class="form-control w-25 ms-2">
                         </div>
-                        <div class="item-name px-3 d-flex justify-content-around align-items-center" *ngIf="SelectedItem.sizevar.length == 2">
+                        <div class="item-name px-3 mt-3 d-flex justify-content-around align-items-center" *ngIf="SelectedItem.sizevar.length == 2">
                             <button class="sizeVarBtn" [ngClass]="{ 'active': SelectedSize == 'H' }" (click)="selectSize('H', 0)">Half</button>
                             <button class="sizeVarBtn" [ngClass]="{ 'active': SelectedSize == 'F' }" (click)="selectSize('F', 1)">Full</button>
                         </div>

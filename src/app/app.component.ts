@@ -29,40 +29,6 @@ export class AppComponent {
         this._authService.IsAdmin = this._router.url.includes('/admin') ? true : false;
       }
     });
-    setTimeout(() => {
-      this.checkUser();
-    }, 1000);
-  }
-
-  checkUser() {
-    const token = localStorage.getItem('token');
-      if (token) {
-        const parsedToken = JSON.parse(token);
-        if (parsedToken) {
-          if (new Date() > new Date(parsedToken.tokenExpireAt)) {
-            localStorage.removeItem('token')
-            this.redirectToLogin();
-          }
-          else {
-            this._authService.CurrentLoggedInUser = parsedToken;
-            this._authService.CurrentUserRole = parsedToken.usertype;
-          }
-        }
-        else {
-          this.redirectToLogin();
-        }
-      }
-      else {
-        this.redirectToLogin();
-      }
-  }
-
-  redirectToLogin() {
-    if (!this._authService.IsAdmin) {
-      this._router.navigate(['login']);
-    }
-    else {
-      this._router.navigate(['admin/login']);
-    }
+    setTimeout(() => this._authService.checkUser(), 1000);
   }
 }

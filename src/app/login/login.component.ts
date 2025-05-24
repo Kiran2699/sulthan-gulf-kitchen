@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MainService } from '../services/main.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../environment';
@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -17,6 +17,7 @@ export class LoginComponent {
   LoginSignUpForm!: FormGroup;
   logoUrl = environment.logoUrl;
   IsRegister = false;
+  ClientPhone = environment.clientPhone;
   private _authService = inject(AuthService);
   private router = inject(Router);
   private _mainService = inject(MainService);
