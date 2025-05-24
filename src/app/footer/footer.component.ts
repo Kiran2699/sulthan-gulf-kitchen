@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-footer',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-
+  InstaUrl = environment.instaUrl;
+  FbUrl = environment.fbUrl;
+  WhatsAppUrl = `https://wa.me/${environment.clientPhone}`;
 }

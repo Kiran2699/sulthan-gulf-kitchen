@@ -13,7 +13,9 @@ export class AuthService {
   CurrentUserRole = '';
   IsAdmin = false;
   private ApiUsed = false;
+  RoutesToClear = ['home', 'menu', 'contact-us'];
   private _mainService = inject(MainService);
+  private _router = inject(Router);
 
   constructor(private _firestore: Firestore) {}
 
@@ -53,5 +55,44 @@ export class AuthService {
     const collData = collectionData(itemsRef, { idField: 'id' });
     this._mainService.IsLoading = false;
     return collData;
+  }
+
+  checkUser() {
+    const token = localStorage.getItem('token');
+      if (token) {
+        const parsedToken = JSON.parse(token);
+        if (parsedToken) {
+          if (new Date() > new Date(parsedToken.tokenExpireAt)) {
+            localStorage.removeItem('token')
+            this.checkAndRedirect();
+          }
+          else {
+            this.CurrentLoggedInUser = parsedToken;
+            this.CurrentUserRole = parsedToken.usertype;
+          }
+        }
+        else {
+          this.checkAndRedirect();
+        }
+      }
+      else {
+        this.checkAndRedirect();
+      }
+  }
+
+  redirectToLogin() {
+    if (!this.IsAdmin) {
+      this._router.navigate(['login']);
+    }
+    else {
+      this._router.navigate(['admin/login']);
+    }
+  }
+
+  checkAndRedirect(): void {
+    const matchFound = this.RoutesToClear.some(route => this._router.url.includes(route));
+    if (!matchFound) {
+      this.redirectToLogin();
+    }
   }
 }
