@@ -121,6 +121,7 @@ export class FoodMenusComponent implements OnInit {
   selectItem(item: any) {
     if (this.MenuType == 'R') {
       this.SelectedSizeItemToDisplay = item.sizevar[0];
+      this.SelectedSizeItemToDisplay.name = item.name;
       this.SelectedItem = item;
       this.SelectedSize = item.sizevar.length === 3 ? 'Q' : 'H';
       $('#selectedItemModel').modal('show');

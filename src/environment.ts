@@ -17,6 +17,8 @@ export const environment = {
   deliveryFee: '2.50',
   clientPhone: '+447901388979',
   sessionTimeout: 1, // 1 hour
+  instaUrl: 'https://www.instagram.com/sulthan_gulf_kitchen?igsh=MTdmM3dkZDdzemVnaA==',
+  fbUrl: 'https://www.facebook.com/share/1DHmRh9VeN/?mibextid=wwXIfr',
   logoUrl: 'https://firebasestorage.googleapis.com/v0/b/testing-app-480e1.firebasestorage.app/o/app-images%2Flogo.PNG?alt=media',
   deliveringCity: 
     [
